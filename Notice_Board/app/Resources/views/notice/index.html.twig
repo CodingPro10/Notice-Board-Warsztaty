@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Notices list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Description</th>
+                <th>Title</th>
+                <th>Picno</th>
+                <th>Exp_date</th>
+                <th>Category</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for notice in notices %}
+            <tr>
+                <td><a href="{{ path('category_show', { 'id': notice.id }) }}">{{ notice.id }}</a></td>
+                <td>{{ notice.description }}</td>
+                <td>{{ notice.title }}</td>
+                <td>{{ notice.picNo }}</td>
+                <td>{% if notice.expdate %}{{ notice.expdate|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ notice.category }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('category_show', { 'id': notice.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('category_edit', { 'id': notice.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('category_new') }}">Create a new notice</a>
+        </li>
+    </ul>
+{% endblock %}
